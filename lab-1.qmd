@@ -71,6 +71,33 @@ This plot is preferable to the plot in exercise 2. This plot makes it easier to 
 
 ## Exercise 5
 
+```{r}
+#| label: exercise-5
+
+ggplot(midwest, mapping = aes(x = state, y = area, fill = state)) +
+  geom_boxplot() +
+  theme_dark() +
+  labs(x = "State", y = "Area", 
+       title = "Distribution of County Areas Across the Midwest") +
+  theme(legend.position = "none")
+```
+These plots reveal that on average Indiana and Ohio tend to have the smallest counties while Wisconsin and Michigan tend to have the largest counties of the observed states. Additionally, Ohio and Indiana tend to have many counties of very similar sizes whereas the other three states have much greater variance in the size of their counties. Michigan has the largest singular county as observed by the outlier data point near the top of the graph.
+
 ## Exercise 6
 
+```{r}
+#| label: exercise-6
+midwest <- midwest |>
+  mutate(metro = if_else(inmetro == 1, "Metro", "Non-Metro"))
+ggplot(midwest, aes(fill=metro, y = 1, x=state)) + 
+    geom_bar(position="fill", stat="identity") +
+  labs(x = "State", y = "Percentage", title = "Percentage of Metro Counties by State", fill = "")
+```
+It appears Ohio and Indiana have the highest percentage of metropolitan counties, both above 37.5%. The other three states all have just above 25% metropolitan counties. This correlates to the county area distribution of Ohio and Indiana being similar and the county area distribution of the other three states being similar. This would make it appear as though non-metropolitan counties have on average a larger area which correlates with what is true in reality.
+
 ## Exercise 7
+
+```{r}
+#| label: exercise-7
+
+```
