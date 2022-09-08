@@ -18,6 +18,8 @@ library(viridis)
 ## Exercise 1
 
 ```{r}
+#| label: exercise-1
+
 ggplot(midwest, mapping = aes(x = popdensity)) + 
   geom_histogram(binwidth = 10000, alpha = 0.8, color = "black", 
                  fill = "grey") +
@@ -30,22 +32,42 @@ The data distribution is strongly right skewed. A vast majority of counties have
 ## Exercise 2
 
 ```{r}
+#| label: exercise-2
+
 ggplot(midwest, mapping = aes(x = percollege, y = percbelowpoverty, 
                               color = state)) +
   geom_point() + 
   labs(x = "Percent of Population with a College Degree", 
        y = "Percentage Living Below Poverty Line", 
        title = "College Education versus Poverty Rates in the Midwest",
-       fill = "State") +
-  theme_light()
+       color = "State") +
+  theme_light() + 
+  scale_color_viridis_d(option = "D")
 ```
 
 
 ## Exercise 3
 
-(Type your answer to Exercise 3 here. Add code chunks as needed. Don't forget to label your code chunk. Do not use spaces in code chunk labels.)
+A vast majority of counties across all five Midwest states have college education rates between 10 and 25 percent and poverty rates between 5 and 20 percent. The states have a few key differences. Wisconsin has far less counties with college education rates lower than 15 percent than the other four observed states. Indiana has lower poverty rates on average than the other states. Ohio has overall the highest poverty and lowest college education rates. Illinois is somewhat similar to Ohio except that it has a number of counties with higher college education percentages. 
 
 ## Exercise 4
+
+```{r}
+#| label: exercise-4
+
+ggplot(midwest, mapping = aes(x = percollege, y = percbelowpoverty, 
+                              color = state)) +
+  geom_point() + 
+  labs(x = "Percent of Population with a College Degree", 
+       y = "Percentage Living Below Poverty Line", 
+       title = "College Education versus Poverty Rates in the Midwest") +
+  theme_light() + 
+  theme(legend.position = "none") +
+  facet_wrap("state") +
+  geom_smooth(se = FALSE)
+  scale_color_viridis_d(option = "D")
+```
+This plot is preferable to the plot in exercise 2. This plot makes it easier to analyze the data from each individual state. Additionally, the fit lines give a good rough feeling of how college education rates correlation to poverty rates overall in each state.
 
 ## Exercise 5
 
