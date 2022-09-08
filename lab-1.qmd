@@ -91,7 +91,9 @@ midwest <- midwest |>
   mutate(metro = if_else(inmetro == 1, "Metro", "Non-Metro"))
 ggplot(midwest, aes(fill=metro, y = 1, x=state)) + 
     geom_bar(position="fill", stat="identity") +
-  labs(x = "State", y = "Percentage", title = "Percentage of Metro Counties by State", fill = "")
+  scale_fill_viridis_d(option = "A") +
+  labs(x = "State", y = "Percentage", 
+       title = "Percentage of Metro Counties by State", fill = "")
 ```
 It appears Ohio and Indiana have the highest percentage of metropolitan counties, both above 37.5%. The other three states all have just above 25% metropolitan counties. This correlates to the county area distribution of Ohio and Indiana being similar and the county area distribution of the other three states being similar. This would make it appear as though non-metropolitan counties have on average a larger area which correlates with what is true in reality.
 
@@ -100,4 +102,12 @@ It appears Ohio and Indiana have the highest percentage of metropolitan counties
 ```{r}
 #| label: exercise-7
 
+ggplot(midwest, mapping = aes(x = percollege, y = popdensity, 
+                              color = percbelowpoverty)) +
+  geom_point(size = 2, alpha = 0.5) +
+  facet_wrap(~state) +
+  labs(x = "% college educated", y = "Population density (person / unit area)", 
+       title = "Do people with college degrees tend to live in denser areas?",
+       color = "% below\npoverty line") +
+  theme_minimal()
 ```
